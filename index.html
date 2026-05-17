@@ -6,12 +6,22 @@
   <title>Observatório Tech</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem('ot-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
 
+  <div class="reading-progress-wrap" aria-hidden="true">
+    <div class="reading-progress" id="readingProgress"></div>
+  </div>
+
   <!-- HEADER -->
-  <header>
-    <a href="#" class="logo-wrap">
+  <header class="site-header">
+    <a href="index.html" class="logo-wrap">
       <svg class="logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- dome cylinder -->
         <rect x="18" y="50" width="44" height="10" rx="2" fill="#c9a84c" opacity="0.9"/>
@@ -41,14 +51,51 @@
       </div>
     </a>
 
-    <nav>
-      <a href="#categorias">Tecnologia</a>
-      <a href="#categorias">Inteligência Artificial</a>
-      <a href="#categorias">Filmes</a>
-      <a href="#categorias">Jogos</a>
-      <a href="#" class="nav-cta">Newsletter</a>
-    </nav>
+    <div class="header-actions">
+      <div class="search-wrap" id="searchWrap">
+        <button type="button" class="search-toggle" aria-label="Abrir busca" aria-expanded="false" aria-controls="searchPanel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-3-3"/>
+          </svg>
+        </button>
+        <div class="search-panel" id="searchPanel">
+          <select id="searchFilter" class="search-filter" aria-label="Filtrar por categoria">
+            <option value="all">Todas as categorias</option>
+            <option value="tech">Tecnologia</option>
+            <option value="ia">Inteligência Artificial</option>
+            <option value="filmes">Filmes</option>
+            <option value="jogos">Jogos</option>
+          </select>
+          <input type="search" class="search-input" placeholder="Buscar artigos…" aria-label="Buscar artigos" autocomplete="off" />
+          <div class="search-results" id="searchResults" hidden></div>
+        </div>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Principal">
+        <a href="categoria.html?c=tech">Tecnologia</a>
+        <a href="categoria.html?c=ia">Inteligência Artificial</a>
+        <a href="categoria.html?c=filmes">Filmes</a>
+        <a href="categoria.html?c=jogos">Jogos</a>
+        <a href="#" class="nav-cta">Newsletter</a>
+      </nav>
+
+      <button type="button" class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile" aria-hidden="true">
+    <a href="categoria.html?c=tech">Tecnologia</a>
+    <a href="categoria.html?c=ia">Inteligência Artificial</a>
+    <a href="categoria.html?c=filmes">Filmes</a>
+    <a href="categoria.html?c=jogos">Jogos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#ferramentas-ia">Ferramentas IA</a>
+    <a href="#" class="nav-cta mobile-nav-cta">Newsletter</a>
+  </nav>
 
   <!-- HERO -->
   <section id="hero">
@@ -65,7 +112,7 @@
       </p>
       <div class="hero-btns">
         <a href="#categorias" class="btn-primary">Explorar conteúdo</a>
-        <a href="#" class="btn-secondary">Sobre o projeto</a>
+        <a href="#sobre" class="btn-secondary">Sobre o projeto</a>
       </div>
     </div>
 
@@ -75,6 +122,184 @@
         <circle cx="7" cy="6" r="2" fill="currentColor"/>
       </svg>
       Rolar
+    </div>
+  </section>
+
+  <!-- EM DESTAQUE -->
+  <section id="destaque">
+    <div class="section-inner">
+      <p class="section-label">▸ Seleção editorial</p>
+      <h2 class="section-title">Em Destaque</h2>
+      <div class="divider"></div>
+      <p class="section-desc">
+        As histórias que estão moldando o debate tech esta semana — curadas pela nossa redação.
+      </p>
+
+      <div class="featured-grid">
+        <a href="artigo.html?id=1" class="feat-card feat-card--main">
+          <div class="feat-card__img" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80')"></div>
+          <div class="feat-card__overlay"></div>
+          <div class="feat-card__body">
+            <span class="feat-tag" data-cat="ia">Inteligência Artificial</span>
+            <h3 class="feat-title">GPT-5 e o novo paradigma de agentes autônomos na produção de software</h3>
+            <p class="feat-excerpt">Como laboratórios e startups estão redefinindo fluxos de desenvolvimento com modelos que planejam, executam e iteram sozinhos.</p>
+            <span class="feat-meta">15 mai 2025 · 12 min de leitura</span>
+          </div>
+        </a>
+
+        <a href="artigo.html?id=2" class="feat-card feat-card--sm">
+          <div class="feat-card__img" style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80')"></div>
+          <div class="feat-card__overlay"></div>
+          <div class="feat-card__body">
+            <span class="feat-tag" data-cat="filmes">Filmes</span>
+            <h3 class="feat-title">Blade Runner 2099: o que a série revela sobre IA e memória</h3>
+            <span class="feat-meta">14 mai 2025</span>
+          </div>
+        </a>
+
+        <a href="artigo.html?id=3" class="feat-card feat-card--sm">
+          <div class="feat-card__img" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80')"></div>
+          <div class="feat-card__overlay"></div>
+          <div class="feat-card__body">
+            <span class="feat-tag" data-cat="jogos">Jogos</span>
+            <h3 class="feat-title">GTA VI: engine, mundo aberto e o futuro do streaming de jogos</h3>
+            <span class="feat-meta">13 mai 2025</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÚLTIMAS NOTÍCIAS -->
+  <section id="noticias">
+    <div class="section-inner">
+      <p class="section-label">▸ Feed em tempo real</p>
+      <h2 class="section-title">Últimas Notícias</h2>
+      <div class="divider"></div>
+
+      <div class="news-list">
+        <a href="#" class="news-card">
+          <div class="news-thumb" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80')"></div>
+          <div class="news-body">
+            <span class="news-tag" data-cat="tech">Tecnologia</span>
+            <h3 class="news-title">Apple anuncia chip M5 com foco em inferência local para IA generativa</h3>
+            <time class="news-date" datetime="2025-05-15">15 de maio de 2025</time>
+          </div>
+        </a>
+
+        <a href="#" class="news-card">
+          <div class="news-thumb" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&q=80')"></div>
+          <div class="news-body">
+            <span class="news-tag" data-cat="ia">Inteligência Artificial</span>
+            <h3 class="news-title">OpenAI e Anthropic firmam acordo de segurança com governos da UE</h3>
+            <time class="news-date" datetime="2025-05-14">14 de maio de 2025</time>
+          </div>
+        </a>
+
+        <a href="#" class="news-card">
+          <div class="news-thumb" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80')"></div>
+          <div class="news-body">
+            <span class="news-tag" data-cat="filmes">Filmes</span>
+            <h3 class="news-title">Duna: Parte Três entra em pré-produção com orçamento recorde da Legendary</h3>
+            <time class="news-date" datetime="2025-05-13">13 de maio de 2025</time>
+          </div>
+        </a>
+
+        <a href="#" class="news-card">
+          <div class="news-thumb" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b2b0e?w=400&q=80')"></div>
+          <div class="news-body">
+            <span class="news-tag" data-cat="jogos">Jogos</span>
+            <h3 class="news-title">Nintendo Switch 2 bate recorde de pré-vendas na primeira semana</h3>
+            <time class="news-date" datetime="2025-05-12">12 de maio de 2025</time>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMENTÁRIOS -->
+  <section id="comentarios">
+    <div class="section-inner">
+      <p class="section-label">▸ Comunidade</p>
+      <h2 class="section-title">Comentários</h2>
+      <div class="divider"></div>
+      <p class="section-desc">
+        Compartilhe sua opinião sobre as notícias e tendências — sua mensagem fica salva neste dispositivo.
+      </p>
+
+      <form class="comment-form" id="commentForm">
+        <label class="sr-only" for="commentInput">Seu comentário</label>
+        <textarea id="commentInput" class="comment-input" rows="3" placeholder="Escreva seu comentário…" required maxlength="500"></textarea>
+        <button type="submit" class="btn-primary comment-submit">Publicar</button>
+      </form>
+
+      <p class="comment-empty" id="commentEmpty">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+      <ul class="comment-list" id="commentList" aria-live="polite"></ul>
+    </div>
+  </section>
+
+  <!-- TENDÊNCIAS DA SEMANA -->
+  <section id="tendencias">
+    <div class="section-inner">
+      <p class="section-label">▸ Radar semanal</p>
+      <h2 class="section-title">Tendências da Semana</h2>
+      <div class="divider"></div>
+      <p class="section-desc">
+        Os assuntos com maior tração entre nossos leitores — medidos por engajamento, buscas e menções na comunidade.
+      </p>
+
+      <ol class="trends-list">
+        <li class="trend-item">
+          <span class="trend-rank">01</span>
+          <div class="trend-info">
+            <span class="trend-title">Regulamentação de IA na União Europeia</span>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar" data-pct="96"></div>
+            </div>
+          </div>
+          <span class="trend-pct">96%</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-rank">02</span>
+          <div class="trend-info">
+            <span class="trend-title">Lançamento do Nintendo Switch 2</span>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar" data-pct="88"></div>
+            </div>
+          </div>
+          <span class="trend-pct">88%</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-rank">03</span>
+          <div class="trend-info">
+            <span class="trend-title">Chips M5 e corrida de hardware para LLMs</span>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar" data-pct="82"></div>
+            </div>
+          </div>
+          <span class="trend-pct">82%</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-rank">04</span>
+          <div class="trend-info">
+            <span class="trend-title">Séries de ficção científica em streaming</span>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar" data-pct="74"></div>
+            </div>
+          </div>
+          <span class="trend-pct">74%</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-rank">05</span>
+          <div class="trend-info">
+            <span class="trend-title">Agentes autônomos no desenvolvimento de software</span>
+            <div class="trend-bar-wrap">
+              <div class="trend-bar" data-pct="69"></div>
+            </div>
+          </div>
+          <span class="trend-pct">69%</span>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -90,28 +315,28 @@
 
       <div class="cards-grid">
 
-        <a href="#" class="cat-card" data-cat="tech">
+        <a href="categoria.html?c=tech" class="cat-card" data-cat="tech">
           <div class="cat-icon">🔭</div>
           <div class="cat-name">Tecnologia</div>
           <div class="cat-desc">Lançamentos, tendências e análises sobre o que está moldando o mundo digital agora.</div>
           <div class="cat-arrow">Explorar →</div>
         </a>
 
-        <a href="#" class="cat-card" data-cat="ia">
+        <a href="categoria.html?c=ia" class="cat-card" data-cat="ia">
           <div class="cat-icon">🤖</div>
           <div class="cat-name">Inteligência Artificial</div>
           <div class="cat-desc">Da pesquisa ao impacto real: LLMs, automação, ética e o futuro do trabalho com IA.</div>
           <div class="cat-arrow">Explorar →</div>
         </a>
 
-        <a href="#" class="cat-card" data-cat="filmes">
+        <a href="categoria.html?c=filmes" class="cat-card" data-cat="filmes">
           <div class="cat-icon">🎬</div>
           <div class="cat-name">Filmes</div>
           <div class="cat-desc">Ficção científica, tech noir e tudo que o cinema tem a dizer sobre tecnologia e humanidade.</div>
           <div class="cat-arrow">Explorar →</div>
         </a>
 
-        <a href="#" class="cat-card" data-cat="jogos">
+        <a href="categoria.html?c=jogos" class="cat-card" data-cat="jogos">
           <div class="cat-icon">🎮</div>
           <div class="cat-name">Jogos</div>
           <div class="cat-desc">Reviews, notícias e análises de um mercado que não para de crescer e inovar.</div>
@@ -122,12 +347,118 @@
     </div>
   </section>
 
+  <!-- SOBRE O OBSERVATÓRIO -->
+  <section id="sobre" class="sobre-section">
+    <div class="sobre-parallax-bg" aria-hidden="true"></div>
+    <div class="sobre-overlay" aria-hidden="true"></div>
+    <div class="section-inner sobre-content">
+      <p class="section-label">▸ Quem somos</p>
+      <h2 class="section-title">Sobre o Observatório</h2>
+      <div class="divider"></div>
+      <p class="sobre-missao">
+        O Observatório Tech nasceu da convicção de que tecnologia, cultura e entretenimento não vivem em silos —
+        eles se cruzam, se influenciam e moldam o futuro que todos vamos habitar. Nossa missão é ser o ponto de
+        encontro para quem quer entender esse futuro com profundidade, contexto e curadoria editorial independente.
+      </p>
+
+      <div class="pilares-grid">
+        <div class="pilar-card">
+          <div class="pilar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18M3 12h18"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3 class="pilar-name">Curadoria</h3>
+          <p class="pilar-desc">Selecionamos o que importa entre o ruído — com critério editorial e independência.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 19V5M4 19l4-4M4 19l-4-4"/>
+              <path d="M20 19V9M20 9l-3-3M20 9l3-3"/>
+            </svg>
+          </div>
+          <h3 class="pilar-name">Profundidade</h3>
+          <p class="pilar-desc">Análises que vão além do headline, conectando tendências a impactos reais.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+            </svg>
+          </div>
+          <h3 class="pilar-name">Comunidade</h3>
+          <p class="pilar-desc">Um espaço para leitores que compartilham curiosidade sobre o que vem por aí.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 3a9 9 0 1 0 9 9"/>
+              <path d="M12 7v5l3 3"/>
+              <path d="M17 3l1 4M20 6l-4 1"/>
+            </svg>
+          </div>
+          <h3 class="pilar-name">Antecipação</h3>
+          <p class="pilar-desc">Mapeamos tendências antes que virem manchete — para você chegar preparado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS IA -->
+  <section id="ferramentas-ia">
+    <div class="section-inner">
+      <p class="section-label">▸ Inteligência artificial</p>
+      <h2 class="section-title">Ferramentas do Observatório</h2>
+      <div class="divider"></div>
+      <p class="section-desc">
+        Resuma notícias, gere manchetes no nosso estilo editorial ou converse com o Assistente — powered by Claude.
+      </p>
+
+      <div class="ai-tools-grid">
+        <article class="ai-tool-card reveal">
+          <h3 class="ai-tool-title">Resumidor de notícias</h3>
+          <p class="ai-tool-desc">Cole o texto de uma matéria e receba um resumo curto com categoria sugerida.</p>
+          <form class="ai-tool-form" id="summarizeForm">
+            <textarea id="summarizeInput" class="ai-textarea" rows="6" placeholder="Cole aqui o texto da notícia…" maxlength="12000" required></textarea>
+            <button type="submit" class="btn-primary">Resumir</button>
+          </form>
+          <div class="ai-result" id="summarizeResult" hidden></div>
+        </article>
+
+        <article class="ai-tool-card reveal">
+          <h3 class="ai-tool-title">Gerador de títulos</h3>
+          <p class="ai-tool-desc">Descreva a notícia e a IA sugere 3 manchetes no estilo Observatório Tech.</p>
+          <form class="ai-tool-form" id="titlesForm">
+            <textarea id="titlesInput" class="ai-textarea" rows="4" placeholder="Ex.: Apple lançou chip com IA local para desenvolvedores…" maxlength="2000" required></textarea>
+            <button type="submit" class="btn-primary">Gerar títulos</button>
+          </form>
+          <div class="ai-result" id="titlesResult" hidden></div>
+        </article>
+      </div>
+
+      <p class="ai-hint">
+        Use o botão <strong>Assistente do Observatório</strong> no canto da tela para tirar dúvidas sobre tech, IA, filmes e jogos.
+      </p>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <p class="footer-copy">© 2025 <span>Observatório Tech</span> — Todos os direitos reservados.</p>
     <p class="footer-copy" style="font-size:0.65rem;">Feito com curiosidade e café ☕</p>
   </footer>
 
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="visual.js"></script>
+  <script src="engagement.js"></script>
+  <script src="ai.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

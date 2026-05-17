@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Observatório Tech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem('ot-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body class="error-page-body">
+
+  <canvas id="errorStarfield" class="error-starfield" aria-hidden="true"></canvas>
+
+  <main class="error-page">
+    <div class="error-telescope-scene" aria-hidden="true">
+      <div class="error-dome">
+        <div class="error-dome-arch"></div>
+        <div class="error-dome-base"></div>
+      </div>
+      <div class="error-arm">
+        <div class="error-tube"></div>
+        <div class="error-lens"></div>
+      </div>
+      <div class="error-scan-beam"></div>
+    </div>
+
+    <p class="error-code">404</p>
+    <h1 class="error-title">Sinal perdido no espaço</h1>
+    <p class="error-desc">
+      Nosso telescópio vasculhou o cosmos, mas esta página não está em nenhuma órbita conhecida.
+    </p>
+    <div class="error-actions">
+      <a href="index.html" class="btn-primary">Voltar ao início</a>
+      <a href="busca.html" class="btn-secondary">Buscar artigos</a>
+    </div>
+  </main>
+
+  <script src="404.js"></script>
+</body>
+</html>
