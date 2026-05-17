@@ -8,7 +8,22 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
-  }
+    "express": "^4.21.2",
+    "openai": "^6.38.0"
+  },
+  "description": "Site editorial sobre tecnologia, IA, filmes e jogos.",
+  "main": "404.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasraad/Observatorio_Tech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasraad/Observatorio_Tech/issues"
+  },
+  "homepage": "https://github.com/lucasraad/Observatorio_Tech#readme"
 }
