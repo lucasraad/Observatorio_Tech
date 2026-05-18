@@ -3,25 +3,32 @@ import OpenAI from 'openai'
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export default async function handler(req, res) {
+  console.log('API KEY presente:', !!process.env.OPENAI_API_KEY)
+
   if (req.method !== 'POST') return res.status(405).end()
 
-  const { messages } = req.body
+  try {
+    const { messages } = req.body
 
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-      {
-        role: 'system',
-        content: `Você é o Assistente do Observatório Tech, um portal sobre tecnologia, IA, filmes e jogos. 
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: `Você é o Assistente do Observatório Tech, um portal sobre tecnologia, IA, filmes e jogos. 
         Responda de forma concisa e informativa em português. Se a pergunta não for relacionada a essas áreas, 
         redirecione gentilmente para os temas do portal.`
-      },
-      ...messages
-    ],
-    max_tokens: 500
-  })
+        },
+        ...messages
+      ],
+      max_tokens: 500
+    })
 
-  return res.status(200).json({
-    reply: completion.choices[0].message.content
-  })
+    return res.status(200).json({
+      reply: completion.choices[0].message.content
+    })
+  } catch (err) {
+    console.error('Erro na função:', err)
+    return res.status(500).json({ error: err.message, stack: err.stack })
+  }
 }
